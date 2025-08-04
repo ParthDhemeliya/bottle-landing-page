@@ -33,6 +33,7 @@ export default function RootLayout({
     <html lang="en">
       <body
         className={`${geistSans.variable} ${geistMono.variable} ${grotesk.variable} antialiased`}
+        style={{ backgroundColor: 'white' }}
       >
         <NavBar />
         {children}

@@ -7,6 +7,9 @@ import BottleCap from '@/components/svg/bottle/bottleCap'
 import BottleDown from '@/components/svg/bottle/bottleDown'
 import Bottle2 from '@/components/svg/bottle/bottle2'
 import Bottle3 from '@/components/svg/bottle/Bottle3'
+import Product from '@/components/Product'
+import AboutUs from '@/components/AboutUs'
+import { relative } from 'path'
 
 export default function Home() {
   const containerRef = useRef<HTMLDivElement>(null)
@@ -19,6 +22,7 @@ export default function Home() {
   const bottle3Ref = useRef<HTMLDivElement>(null)
   const home1Ref = useRef<HTMLDivElement>(null)
   const home3Ref = useRef<HTMLDivElement>(null)
+  const animationStoppedRef = useRef(false)
 
   useEffect(() => {
     const tl = gsap.timeline({ delay: 1.2 })
@@ -121,50 +125,48 @@ export default function Home() {
   useEffect(() => {
     const handleScroll = () => {
       const scrollY = window.scrollY
-      const home1Element = home1Ref.current
-      const home3Element = home3Ref.current
+      const cap = bottleCapRef.current
+      const bottom = bottleDownRef.current
+      const nextSection = home3Ref.current
 
-      if (home1Element && home3Element) {
-        const home1Top = home1Element.offsetTop
-        const home3Top = home3Element.offsetTop
-        const windowHeight = window.innerHeight
+      if (!cap || !bottom || !nextSection) return
 
-        // Calculate scroll progress based on when home3 is fully in view
-        const totalDistance = home3Top - home1Top - windowHeight
-        const currentProgress = Math.max(
-          0,
-          Math.min(scrollY - home1Top, totalDistance)
-        )
-        const scrollProgress =
-          totalDistance > 0 ? currentProgress / totalDistance : 0
+      // Start animation when scrollY reaches 200px
+      const animationStart = 200
 
-        // Apply easing to slow down movement visually
-        const easedProgress = Math.pow(scrollProgress, 0.6) // slower easing
+      // Get the absolute position of the next section (home3Ref)
+      const nextSectionTop =
+        nextSection.getBoundingClientRect().top + window.scrollY
 
-        // Animate bottle cap to come down and close the bottle
-        if (easedProgress >= 0 && easedProgress <= 1) {
-          const capStartTop = 117
-          const downStartTop = 567
-          const meetingPoint = downStartTop // Cap meets the bottom where it is
+      // Stop animation 100px *before* that section reaches
+      const animationEnd = nextSectionTop - 100
 
-          // Only move the cap down to meet the bottom, then stop
-          const capTargetTop = Math.min(
-            capStartTop + (meetingPoint - capStartTop) * easedProgress,
-            meetingPoint
-          )
+      // Clamp scroll within the animation range
+      const clamped = Math.min(Math.max(scrollY, animationStart), animationEnd)
 
-          gsap.set(bottleCapRef.current, {
-            top: `${capTargetTop}px`,
-          })
+      // Calculate scroll progress (0 to 1)
+      const rawProgress =
+        (clamped - animationStart) / (animationEnd - animationStart)
+      const progress = Math.pow(rawProgress, 0.6) // Ease
 
-          // Keep bottle bottom in place (don't move it up)
-          // Bottle bottom stays at downStartTop (567px)
-        }
-      }
+      // Animate the bottle parts
+      const capStart = 117
+      const capEnd = 347
+      const downStart = 567
+      const downEnd = 347
+
+      const capTop = capStart + (capEnd - capStart) * progress
+      const downTop = downStart + (downEnd - downStart) * progress
+
+      gsap.set(cap, { top: `${capTop}px` })
+      gsap.set(bottom, { top: `${downTop}px` })
+
+      // Debug log
+      // console.log({ scrollY, nextSectionTop, capTop, downTop })
     }
 
     window.addEventListener('scroll', handleScroll)
-    handleScroll() // Initial call to set positions
+    handleScroll() // initial call
 
     return () => {
       window.removeEventListener('scroll', handleScroll)
@@ -173,7 +175,10 @@ export default function Home() {
 
   return (
     <>
-      <div className="flex min-h-screen flex-col items-center justify-between bg-white">
+      <div
+        className="flex flex-col items-center justify-between bg-white"
+        style={{ backgroundColor: 'white' }}
+      >
         {/* Hero Section */}
         <section className="relative w-full max-w-6xl flex flex-col items-center text-center px-4">
           <div
@@ -343,7 +348,7 @@ export default function Home() {
       </div>
       <div
         ref={home3Ref}
-        className="w-[1512px] h-[860px]"
+        className="w-[1512px] h-[860px] "
         style={{
           opacity: 1,
         }}
@@ -406,6 +411,243 @@ export default function Home() {
             </div>
           </div>
         </div>
+      </div>
+      <div
+        className="absolute"
+        style={{
+          width: '100%',
+          maxWidth: '1320px',
+          height: 'auto',
+          minHeight: '1258px',
+          transform: 'rotate(0deg) translateX(-50%)',
+          opacity: 1,
+          top: '1800px',
+          left: '50%',
+          background: 'white',
+          padding: '20px',
+        }}
+      >
+        {/* Header Section */}
+        <div
+          style={{
+            width: '100%',
+            height: 'auto',
+            minHeight: '120px',
+            display: 'flex',
+            flexDirection: 'row',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+            transform: 'rotate(0deg)',
+            opacity: 1,
+
+            padding: '20px',
+            flexWrap: 'wrap',
+            gap: '20px',
+          }}
+        >
+          <div
+            style={{
+              width: '100%',
+              maxWidth: '538px',
+              height: 'auto',
+              minHeight: '120px',
+              transform: 'rotate(0deg)',
+              opacity: 1,
+              display: 'flex',
+              flexDirection: 'column',
+              justifyContent: 'center',
+            }}
+          >
+            <div
+              style={{
+                fontFamily: 'Familjen Grotesk, sans-serif',
+                fontWeight: 600,
+                fontStyle: 'normal',
+                fontSize: 'clamp(32px, 5vw, 60px)',
+                lineHeight: '100%',
+                letterSpacing: '0%',
+                color: 'black',
+                marginBottom: '8px',
+              }}
+            >
+              Hydration Essentials
+            </div>
+            <div
+              style={{
+                fontFamily: 'Familjen Grotesk, sans-serif',
+                fontWeight: 400,
+                fontStyle: 'normal',
+                fontSize: 'clamp(16px, 2vw, 24px)',
+                lineHeight: '45px',
+                letterSpacing: '0%',
+                color: 'black',
+              }}
+            >
+              Discover Our Range of Premium Water Bottles
+            </div>
+          </div>
+
+          <div
+            style={{
+              width: 'auto',
+              minWidth: '177px',
+              height: '49px',
+              transform: 'rotate(0deg)',
+              opacity: 1,
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+            }}
+          >
+            <button
+              style={{
+                width: '100%',
+                minWidth: '177px',
+                height: '49px',
+                transform: 'rotate(0deg)',
+                opacity: 1,
+                borderRadius: '100px',
+                gap: '10px',
+                padding: '12px 36px',
+                background: 'linear-gradient(90deg, #00D1FF 0%, #1A83FF 100%)',
+                border: 'none',
+                fontFamily: 'Familjen Grotesk, sans-serif',
+                fontWeight: 600,
+                fontStyle: 'normal',
+                fontSize: 'clamp(14px, 1.5vw, 20px)',
+                lineHeight: '100%',
+                letterSpacing: '0%',
+                textTransform: 'uppercase',
+                color: 'white',
+                cursor: 'pointer',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+              }}
+            >
+              View More
+            </button>
+          </div>
+        </div>
+
+        {/* Products Section */}
+        <div
+          style={{
+            width: '100%',
+            height: 'auto',
+            minHeight: 'clamp(400px, 50vw, 539px)',
+            transform: 'rotate(0deg)',
+            opacity: 1,
+            position: 'relative',
+            top: '0',
+            background: 'white',
+            display: 'flex',
+            flexDirection: 'row',
+            justifyContent: 'center',
+            alignItems: 'flex-start',
+            flexWrap: 'wrap',
+            gap: 'clamp(10px, 2vw, 20px)',
+            padding: 'clamp(10px, 2vw, 20px)',
+          }}
+        >
+          <Product
+            imageSrc="/dummyBottle1.jpg"
+            imageAlt="Bottle 1"
+            name="Rainbow 600"
+            onLearnMore={() =>
+              console.log('Learn more clicked for Rainbow 600')
+            }
+          />
+
+          <Product
+            imageSrc="/dummyBottle2.jpg"
+            imageAlt="Bottle 2"
+            name="Rio 650"
+            onLearnMore={() => console.log('Learn more clicked for Rio 650')}
+          />
+
+          <Product
+            imageSrc="/dummyBottle3.jpg"
+            imageAlt="Bottle 3"
+            name="Big Bull 1300"
+            onLearnMore={() =>
+              console.log('Learn more clicked for Big Bull 1300')
+            }
+          />
+        </div>
+
+        {/* Product 2 Section */}
+        <div
+          style={{
+            width: '100%',
+            height: 'auto',
+            minHeight: 'clamp(400px, 50vw, 539px)',
+            transform: 'rotate(0deg)',
+            opacity: 1,
+            position: 'relative',
+            top: '0',
+            background: 'white',
+            display: 'flex',
+            flexDirection: 'row',
+            justifyContent: 'center',
+            alignItems: 'flex-start',
+            flexWrap: 'wrap',
+            gap: 'clamp(10px, 2vw, 20px)',
+            padding: 'clamp(10px, 2vw, 20px)',
+          }}
+        >
+          <Product
+            imageSrc="/dummyBottle4.jpg"
+            imageAlt="Bottle 1"
+            name="Rome 600"
+            onLearnMore={() => console.log('Learn more clicked for Rome 600')}
+          />
+
+          <Product
+            imageSrc="/dummyBottle1.jpg"
+            imageAlt="Bottle 2"
+            name="Rainbow 600"
+            onLearnMore={() =>
+              console.log('Learn more clicked for Rainbow 600')
+            }
+          />
+
+          <Product
+            imageSrc="/dummyBottle5.jpg"
+            imageAlt="Bottle 3"
+            name="Sweetie 200"
+            onLearnMore={() =>
+              console.log('Learn more clicked for Sweetie 200')
+            }
+          />
+        </div>
+      </div>
+
+      {/* About Us Section - Full Width */}
+      <div
+        style={{
+          width: '100vw',
+          height: '762px',
+          transform: 'rotate(0deg)',
+          opacity: 0.8,
+          position: 'relative',
+          backgroundImage: 'url("aboutusbackgound.jpg")',
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          backgroundRepeat: 'no-repeat',
+          backgroundColor: '#2d3748',
+          color: '#000000CC',
+          margin: '0',
+          top: '1350px',
+          padding: '0',
+          overflow: 'hidden',
+          left: '50%',
+          right: '50%',
+          marginLeft: '-50vw',
+          marginRight: '-50vw',
+        }}
+      >
+        <AboutUs />
       </div>
     </>
   )
