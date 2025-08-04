@@ -8,7 +8,7 @@ export default function NavBar() {
     <header className="bg-white w-full flex justify-between items-center h-[80px] px-4 md:px-20 shadow">
       {/* Logo */}
       <div className="w-[174px] h-[40px] relative mt-[20px]">
-        <Image src={Logo} alt="BOTOL Logo" layout="fill" objectFit="contain" />
+        <Image src={Logo} alt="BOTOL Logo" fill className="object-contain" />
       </div>
 
       {/* Navigation Links */}
