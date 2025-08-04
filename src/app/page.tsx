@@ -9,7 +9,10 @@ import Bottle2 from '@/components/svg/bottle/bottle2'
 import Bottle3 from '@/components/svg/bottle/Bottle3'
 import Product from '@/components/Product'
 import AboutUs from '@/components/AboutUs'
+// import ContactUs from '@/components/ContactUs'
+import ContactUs from './components/ContactUs'
 import { relative } from 'path'
+import FAQ from './components/FAQ'
 
 export default function Home() {
   const containerRef = useRef<HTMLDivElement>(null)
@@ -649,6 +652,26 @@ export default function Home() {
       >
         <AboutUs />
       </div>
+
+      {/* FAQ Section */}
+      <div
+        style={{
+          width: '1510px',
+          height: '886px',
+          top: '3980px',
+          left: '1px',
+          transform: 'rotate(0deg)',
+          opacity: 1,
+          background: '#F3F5F6',
+          position: 'absolute',
+        }}
+      >
+        <FAQ />
+      </div>
+
+      {/* Contact Us Section */}
+
+      <ContactUs />
     </>
   )
 }
