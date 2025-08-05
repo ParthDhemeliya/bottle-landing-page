@@ -3,10 +3,10 @@
 import { useEffect, useRef } from 'react'
 import { gsap } from 'gsap'
 import Image from 'next/image'
-import BottleCap from '@/components/svg/bottle/bottleCap'
-import BottleDown from '@/components/svg/bottle/bottleDown'
 import Bottle2 from '@/components/svg/bottle/bottle2'
 import Bottle3 from '@/components/svg/bottle/Bottle3'
+import BottleCap from '@/components/svg/bottle/bottleCap'
+import BottleDown from '@/components/svg/bottle/bottleDown'
 import Product from '@/components/Product'
 import AboutUs from '@/components/AboutUs'
 // import ContactUs from '@/components/ContactUs'
@@ -17,165 +17,16 @@ import FAQ from './components/FAQ'
 
 export default function Home() {
   const containerRef = useRef<HTMLDivElement>(null)
-  const bottleCapRef = useRef<HTMLDivElement>(null)
-  const bottleDownRef = useRef<HTMLDivElement>(null)
   const textRef = useRef<HTMLDivElement>(null)
   const subtitleRef = useRef<HTMLDivElement>(null)
   const buttonRef = useRef<HTMLDivElement>(null)
   const bottle2Ref = useRef<HTMLDivElement>(null)
   const bottle3Ref = useRef<HTMLDivElement>(null)
+  const bottleCapRef = useRef<HTMLDivElement>(null)
+  const bottleDownRef = useRef<HTMLDivElement>(null)
   const home1Ref = useRef<HTMLDivElement>(null)
   const home3Ref = useRef<HTMLDivElement>(null)
   const animationStoppedRef = useRef(false)
-
-  useEffect(() => {
-    const tl = gsap.timeline({ delay: 1.2 })
-
-    // Initial bottle opening animation
-    tl.fromTo(
-      bottleCapRef.current,
-      { top: '347px', left: '663px', width: '186px', height: '793px' },
-      {
-        top: '117px',
-        left: '663px',
-        width: '186px',
-        height: '793px',
-        duration: 2.4,
-        ease: 'power2.inOut',
-      }
-    )
-      .fromTo(
-        bottleDownRef.current,
-        { top: '347px', left: '663px', width: '186px', height: '793px' },
-        {
-          top: '567px',
-          left: '663px',
-          width: '186px',
-          height: '793px',
-          duration: 2.4,
-          ease: 'power2.inOut',
-        },
-        '<'
-      )
-      .to(
-        '.ring-element',
-        {
-          width: '600px',
-          height: '600px',
-          top: '181px',
-          left: '456px',
-          duration: 2.4,
-          ease: 'power2.inOut',
-        },
-        '<'
-      )
-      .to(
-        textRef.current,
-        {
-          opacity: 1,
-          y: 0,
-          scale: 1,
-          duration: 1.2,
-          ease: 'back.out(1.7)',
-        },
-        '-=1.2'
-      )
-      .to(
-        subtitleRef.current,
-        {
-          opacity: 1,
-          y: 0,
-          scale: 1,
-          duration: 1.0,
-          ease: 'back.out(1.5)',
-        },
-        '-=0.9'
-      )
-      .to(
-        buttonRef.current,
-        {
-          opacity: 1,
-          y: 0,
-          scale: 1,
-          duration: 0.8,
-          ease: 'back.out(1.3)',
-        },
-        '-=0.7'
-      )
-      .to(
-        bottle2Ref.current,
-        {
-          opacity: 1,
-          x: 0,
-          scale: 1,
-          duration: 0.6,
-          ease: 'back.out(1.7)',
-        },
-        '-=0.6'
-      )
-      .to(
-        bottle3Ref.current,
-        {
-          opacity: 1,
-          x: 0,
-          scale: 1,
-          duration: 0.6,
-          ease: 'back.out(1.7)',
-        },
-        '-=0.6'
-      )
-  }, [])
-
-  useEffect(() => {
-    const handleScroll = () => {
-      const scrollY = window.scrollY
-      const cap = bottleCapRef.current
-      const bottom = bottleDownRef.current
-      const nextSection = home3Ref.current
-
-      if (!cap || !bottom || !nextSection) return
-
-      // Start animation when scrollY reaches 200px
-      const animationStart = 200
-
-      // Get the absolute position of the next section (home3Ref)
-      const nextSectionTop =
-        nextSection.getBoundingClientRect().top + window.scrollY
-
-      // Stop animation 100px *before* that section reaches
-      const animationEnd = nextSectionTop - 100
-
-      // Clamp scroll within the animation range
-      const clamped = Math.min(Math.max(scrollY, animationStart), animationEnd)
-
-      // Calculate scroll progress (0 to 1)
-      const rawProgress =
-        (clamped - animationStart) / (animationEnd - animationStart)
-      const progress = Math.pow(rawProgress, 0.6) // Ease
-
-      // Animate the bottle parts
-      const capStart = 117
-      const capEnd = 347
-      const downStart = 567
-      const downEnd = 347
-
-      const capTop = capStart + (capEnd - capStart) * progress
-      const downTop = downStart + (downEnd - downStart) * progress
-
-      gsap.set(cap, { top: `${capTop}px` })
-      gsap.set(bottom, { top: `${downTop}px` })
-
-      // Debug log
-      // console.log({ scrollY, nextSectionTop, capTop, downTop })
-    }
-
-    window.addEventListener('scroll', handleScroll)
-    handleScroll() // initial call
-
-    return () => {
-      window.removeEventListener('scroll', handleScroll)
-    }
-  }, [])
 
   return (
     <>
@@ -184,19 +35,44 @@ export default function Home() {
         style={{ backgroundColor: 'white' }}
       >
         {/* Hero Section */}
-        <section className="relative w-full max-w-6xl flex flex-col items-center text-center px-4">
+        <section className="relative w-full h-screen flex flex-col items-center justify-center text-center px-4">
           <div
             ref={home1Ref}
-            className="relative w-[1512px] h-[860px] flex items-center justify-center"
+            className="relative w-full h-full flex items-center justify-center"
             style={{ opacity: 1 }}
           >
+            {/* Central Bottle with Cap and Bottom */}
             <div
-              className="absolute w-[400px] h-[400px] rounded-full ring-element"
+              ref={bottleCapRef}
+              className="absolute w-[120px] h-[120px] sm:w-[150px] sm:h-[150px] md:w-[180px] md:h-[180px] lg:w-[200px] lg:h-[200px] xl:w-[220px] xl:h-[220px] top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-30"
               style={{
-                top: '281px',
-                bottom: '176px',
-                left: '556px',
-                right: '556px',
+                position: 'absolute',
+                top: '50%',
+                left: '50%',
+                transform: 'translate(-50%, -50%)',
+                zIndex: 30,
+              }}
+            >
+              <BottleCap />
+            </div>
+
+            <div
+              ref={bottleDownRef}
+              className="absolute w-[120px] h-[120px] sm:w-[150px] sm:h-[150px] md:w-[180px] md:h-[180px] lg:w-[200px] lg:h-[200px] xl:w-[220px] xl:h-[220px] top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-30"
+              style={{
+                position: 'absolute',
+                top: '50%',
+                left: '50%',
+                transform: 'translate(-50%, -50%)',
+                zIndex: 30,
+              }}
+            >
+              <BottleDown />
+            </div>
+
+            <div
+              className="absolute w-[320px] h-[320px] sm:w-[350px] sm:h-[350px] md:w-[450px] md:h-[450px] lg:w-[550px] lg:h-[550px] xl:w-[600px] xl:h-[600px] rounded-full ring-element top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
+              style={{
                 background:
                   'conic-gradient(from 0deg, #4DFBFB, #788EFF, #4DFBFB)',
                 padding: '8px',
@@ -211,15 +87,15 @@ export default function Home() {
 
             <div
               ref={textRef}
-              className="absolute w-[1083px] h-[200px] top-[285px] left-[215px] z-20"
+              className="absolute w-full max-w-[1083px] h-auto min-h-[200px] top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-20 px-4"
               style={{
-                opacity: 0,
-                transform: 'scale(0.3) translateY(50px)',
+                opacity: 1,
+                transform: 'scale(1) translateY(-40px)',
                 fontFamily: 'Familjen Grotesk, sans-serif',
                 fontWeight: 600,
                 fontStyle: 'normal',
-                fontSize: '96px',
-                lineHeight: '100px',
+                fontSize: 'clamp(48px, 8vw, 96px)',
+                lineHeight: 'clamp(52px, 8.5vw, 100px)',
                 letterSpacing: '2%',
                 textAlign: 'center',
                 color: '#000000',
@@ -232,30 +108,31 @@ export default function Home() {
 
             <div
               ref={subtitleRef}
-              className="absolute w-[482px] h-[76px] top-[495px] left-[515px] z-20"
+              className="absolute w-full max-w-[600px] h-auto min-h-[76px] top-1/2 left-1/2 transform -translate-x-1/2 translate-y-16 md:translate-y-20 z-20 px-4"
               style={{
-                opacity: 0,
-                transform: 'scale(0.3) translateY(30px)',
+                opacity: 1,
+                transform: 'scale(1) translateY(0px)',
                 fontFamily: 'Familjen Grotesk, sans-serif',
                 fontWeight: 400,
                 fontStyle: 'normal',
-                fontSize: '30px',
+                fontSize: 'clamp(18px, 3vw, 30px)',
                 lineHeight: '100%',
                 letterSpacing: '2%',
                 textAlign: 'center',
                 color: '#000000',
               }}
             >
-              we believe in the power of hydration. Our mission is simple yet
-              vital
+              we believe in the power of hydration.
+              <br />
+              Our mission is simple yet vital
             </div>
 
             <div
               ref={buttonRef}
-              className="absolute w-[175px] h-[49px] top-[601px] left-[669px] z-20 cursor-pointer"
+              className="absolute w-[175px] h-[49px] top-1/2 left-1/2 transform -translate-x-1/2 translate-y-32 md:translate-y-40 z-20 cursor-pointer"
               style={{
-                opacity: 0,
-                transform: 'scale(0.3) translateY(100px)',
+                opacity: 1,
+                transform: 'scale(1) translateY(0px)',
                 borderRadius: '100px',
                 padding: '12px 36px',
                 gap: '10px',
@@ -266,7 +143,7 @@ export default function Home() {
                 color: 'white',
                 fontFamily: 'Familjen Grotesk, sans-serif',
                 fontWeight: 500,
-                fontSize: '16px',
+                fontSize: 'clamp(14px, 2vw, 16px)',
               }}
             >
               Inquiry Now
@@ -274,11 +151,11 @@ export default function Home() {
 
             <div
               ref={bottle2Ref}
-              className="absolute w-[125px] h-[125px] top-[675px] left-[96px] z-20"
+              className="absolute w-[120px] h-[120px] sm:w-[150px] sm:h-[150px] md:w-[180px] md:h-[180px] lg:w-[199px] lg:h-[199px] xl:w-[220px] xl:h-[220px] top-[400px] sm:top-[450px] md:top-[500px] lg:top-[550px] xl:top-[601px] left-[60px] sm:left-[70px] md:left-[80px] lg:left-[96px] xl:left-[110px] z-20"
               style={{
-                opacity: 0,
-                transform: 'scale(0.3) translateX(-200px)',
-                borderRadius: '260.42px',
+                opacity: 1,
+                transform: 'rotate(0deg)',
+                borderRadius: '414.58px',
                 background: 'linear-gradient(180deg, #4DFBFB 0%, #788EFF 100%)',
                 display: 'flex',
                 alignItems: 'center',
@@ -288,12 +165,12 @@ export default function Home() {
               <div
                 className="relative"
                 style={{
-                  width: '31.66767459127246px',
-                  height: '83.33333475271615px',
+                  width: '60px',
+                  height: '130px',
                   position: 'absolute',
-                  top: '18.37px',
-                  left: '36.46px',
-                  transform: 'rotate(-15deg)',
+                  top: '50%',
+                  left: '50%',
+                  transform: 'translate(-50%, -50%) rotate(-15deg)',
                   opacity: 1,
                 }}
               >
@@ -303,11 +180,11 @@ export default function Home() {
 
             <div
               ref={bottle3Ref}
-              className="absolute w-[125px] h-[125px] top-[675px] left-[1291px] z-20"
+              className="absolute w-[120px] h-[120px] sm:w-[150px] sm:h-[150px] md:w-[180px] md:h-[180px] lg:w-[199px] lg:h-[199px] xl:w-[220px] xl:h-[220px] top-[400px] sm:top-[450px] md:top-[500px] lg:top-[550px] xl:top-[601px] right-[60px] sm:right-[70px] md:right-[80px] lg:right-[96px] xl:right-[110px] z-20"
               style={{
-                opacity: 0,
-                transform: 'scale(0.3) translateX(200px)',
-                borderRadius: '260.42px',
+                opacity: 1,
+                transform: 'rotate(0deg)',
+                borderRadius: '414.58px',
                 background: 'linear-gradient(180deg, #4DFBFB 0%, #788EFF 100%)',
                 display: 'flex',
                 alignItems: 'center',
@@ -317,48 +194,31 @@ export default function Home() {
               <div
                 className="relative"
                 style={{
-                  width: '37.26490733439738px',
-                  height: '104.16666271884937px',
+                  width: '60px',
+                  height: '130px',
                   position: 'absolute',
-                  top: '7.29px',
-                  left: '31.37px',
-                  transform: 'rotate(15deg)',
+                  top: '50%',
+                  left: '50%',
+                  transform: 'translate(-50%, -50%) rotate(15deg)',
                   opacity: 1,
                 }}
               >
                 <Bottle3 />
               </div>
             </div>
-
-            {/* Bottle Cap - Sticky */}
-            <div
-              ref={bottleCapRef}
-              className="absolute w-[186px] h-[793px] left-[663px] z-30"
-              style={{ opacity: 1, position: 'fixed', top: '347px' }}
-            >
-              <BottleCap />
-            </div>
-
-            {/* Bottle Down - Sticky */}
-            <div
-              ref={bottleDownRef}
-              className="absolute w-[186px] h-[793px] left-[663px] z-30"
-              style={{ opacity: 1, position: 'fixed', top: '347px' }}
-            >
-              <BottleDown />
-            </div>
           </div>
         </section>
       </div>
       <div
         ref={home3Ref}
-        className="w-[1512px] h-[860px] "
+        className="w-full h-auto min-h-[860px] flex flex-col md:flex-row"
         style={{
           opacity: 1,
         }}
       >
+        {/* left side */}
         <div
-          className="absolute left-0 w-[756px] h-[860px] flex items-center justify-center"
+          className="w-full md:w-1/2 h-[430px] md:h-[860px] flex items-center justify-center"
           style={{
             background: '#E6D4CB',
             opacity: 1,
@@ -368,97 +228,177 @@ export default function Home() {
             src="/bottle4.jpg"
             alt="Hand holding BOTOL bottle"
             width={400}
-            height={600}
-            className="w-auto h-[600px] object-contain"
+            height={860}
+            className="w-full h-[300px] md:h-[600px] lg:h-[860px] object-contain"
           />
         </div>
 
         <div
-          className="absolute right-0 w-[756px] h-[860px] flex items-center justify-center"
+          className="w-full md:w-1/2 h-[430px] md:h-[860px] flex items-center justify-center"
           style={{
-            left: '756px',
             background: '#20292C',
             opacity: 1,
           }}
         >
-          <div className="flex flex-col space-y-8">
-            <div className="flex items-center space-x-4">
-              <div className="w-12 h-12 rounded-full border-2 border-white flex items-center justify-center">
-                <div className="w-6 h-8 bg-white rounded-sm"></div>
+          <div className="flex flex-col space-y-4 md:space-y-8 px-4">
+            <div className="flex items-center space-x-2 md:space-x-4">
+              <div
+                className="w-[70px] h-[70px] md:w-[80px] md:h-[80px] rounded-[500px] border-2 border-white flex items-center justify-center overflow-hidden"
+                style={{
+                  backgroundColor: '#FFFFFF',
+                }}
+              >
+                <Image
+                  src="/vacumebottle.png"
+                  alt="Vacuum Bottles"
+                  width={70}
+                  height={70}
+                  className="w-full h-full object-cover rounded-[500px]"
+                  style={{
+                    borderRadius: '500px',
+                    opacity: 1,
+                  }}
+                />
               </div>
-              <span className="text-white font-medium">Vacuum Bottles</span>
+              <span
+                className="text-white"
+                style={{
+                  fontFamily: 'Familjen Grotesk, sans-serif',
+                  fontWeight: 400,
+                  fontStyle: 'normal',
+                  fontSize: '40px',
+                  lineHeight: '100%',
+                  letterSpacing: '0%',
+                }}
+              >
+                Vacuum Bottles
+              </span>
             </div>
 
-            <div className="flex items-center space-x-4">
-              <div className="w-12 h-12 rounded-full border-2 border-white flex items-center justify-center">
-                <div className="w-6 h-10 bg-white rounded-sm"></div>
+            <div className="flex items-center space-x-2 md:space-x-4">
+              <div
+                className="w-[70px] h-[70px] md:w-[80px] md:h-[80px] rounded-[500px] border-2 border-white flex items-center justify-center overflow-hidden"
+                style={{
+                  backgroundColor: '#FFFFFF',
+                }}
+              >
+                <Image
+                  src="/Fridge Bottle & jugs.png"
+                  alt="Fridge Bottles & Jugs"
+                  width={70}
+                  height={70}
+                  className="w-full h-full object-cover rounded-[500px]"
+                  style={{
+                    borderRadius: '500px',
+                    opacity: 1,
+                  }}
+                />
               </div>
-              <span className="text-white font-medium">
+              <span
+                className="text-white"
+                style={{
+                  fontFamily: 'Familjen Grotesk, sans-serif',
+                  fontWeight: 400,
+                  fontStyle: 'normal',
+                  fontSize: '40px',
+                  lineHeight: '100%',
+                  letterSpacing: '0%',
+                }}
+              >
                 Fridge Bottles & Jugs
               </span>
             </div>
 
-            <div className="flex items-center space-x-4">
-              <div className="w-12 h-12 rounded-full border-2 border-white flex items-center justify-center">
-                <div className="w-7 h-8 bg-white rounded-sm"></div>
+            <div className="flex items-center space-x-2 md:space-x-4">
+              <div
+                className="w-[70px] h-[70px] md:w-[80px] md:h-[80px] rounded-[500px] border-2 border-white flex items-center justify-center overflow-hidden"
+                style={{
+                  backgroundColor: '#FFFFFF',
+                }}
+              >
+                <Image
+                  src="/Borosilicate Bottle.png"
+                  alt="Borosilicate Bottles"
+                  width={70}
+                  height={70}
+                  className="w-full h-full object-cover rounded-[500px]"
+                  style={{
+                    borderRadius: '500px',
+                    opacity: 1,
+                  }}
+                />
               </div>
-              <span className="text-white font-medium">
+              <span
+                className="text-white"
+                style={{
+                  fontFamily: 'Familjen Grotesk, sans-serif',
+                  fontWeight: 400,
+                  fontStyle: 'normal',
+                  fontSize: '40px',
+                  lineHeight: '100%',
+                  letterSpacing: '0%',
+                }}
+              >
                 Borosilicate Bottles
               </span>
             </div>
 
-            <div className="flex items-center space-x-4">
-              <div className="w-12 h-12 rounded-full border-2 border-white flex items-center justify-center">
-                <div className="w-8 h-6 bg-white rounded-sm"></div>
+            <div className="flex items-center space-x-2 md:space-x-4">
+              <div
+                className="w-[70px] h-[70px] md:w-[80px] md:h-[80px] rounded-[500px] border-2 border-white flex items-center justify-center overflow-hidden"
+                style={{
+                  backgroundColor: '#FFFFFF',
+                }}
+              >
+                <Image
+                  src="/kettles.png"
+                  alt="Kettles"
+                  width={70}
+                  height={70}
+                  className="w-full h-full object-cover rounded-[500px]"
+                  style={{
+                    borderRadius: '500px',
+                    opacity: 1,
+                  }}
+                />
               </div>
-              <span className="text-white font-medium">Kettles</span>
+              <span
+                className="text-white"
+                style={{
+                  fontFamily: 'Familjen Grotesk, sans-serif',
+                  fontWeight: 400,
+                  fontStyle: 'normal',
+                  fontSize: '40px',
+                  lineHeight: '100%',
+                  letterSpacing: '0%',
+                }}
+              >
+                Kettles
+              </span>
             </div>
           </div>
         </div>
       </div>
       <div
-        className="relative"
+        className="relative w-full max-w-[1320px] h-auto min-h-[1258px] mx-auto bg-white p-4 md:p-6 lg:p-8"
         style={{
-          width: '100%',
-          maxWidth: '1320px',
-          height: 'auto',
-          minHeight: '1258px',
           transform: 'rotate(0deg)',
           opacity: 1,
-          margin: '0 auto',
-          background: 'white',
-          padding: '20px',
         }}
       >
         {/* Header Section */}
         <div
+          className="w-full h-auto min-h-[120px] flex flex-col md:flex-row justify-between items-center gap-4 md:gap-6 lg:gap-8 p-4 md:p-6"
           style={{
-            width: '100%',
-            height: 'auto',
-            minHeight: '120px',
-            display: 'flex',
-            flexDirection: 'row',
-            justifyContent: 'space-between',
-            alignItems: 'center',
             transform: 'rotate(0deg)',
             opacity: 1,
-
-            padding: '20px',
-            flexWrap: 'wrap',
-            gap: '20px',
           }}
         >
           <div
+            className="w-full max-w-[538px] h-auto min-h-[120px] flex flex-col justify-center text-center md:text-left"
             style={{
-              width: '100%',
-              maxWidth: '538px',
-              height: 'auto',
-              minHeight: '120px',
               transform: 'rotate(0deg)',
               opacity: 1,
-              display: 'flex',
-              flexDirection: 'column',
-              justifyContent: 'center',
             }}
           >
             <div
@@ -491,15 +431,10 @@ export default function Home() {
           </div>
 
           <div
+            className="w-auto min-w-[177px] h-[49px] flex items-center justify-center"
             style={{
-              width: 'auto',
-              minWidth: '177px',
-              height: '49px',
               transform: 'rotate(0deg)',
               opacity: 1,
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
             }}
           >
             <button
@@ -535,22 +470,10 @@ export default function Home() {
 
         {/* Products Section */}
         <div
+          className="w-full h-auto min-h-[400px] md:min-h-[539px] relative bg-white flex flex-col md:flex-row justify-center items-start flex-wrap gap-4 md:gap-6 lg:gap-8 p-4 md:p-6"
           style={{
-            width: '100%',
-            height: 'auto',
-            minHeight: 'clamp(400px, 50vw, 539px)',
             transform: 'rotate(0deg)',
             opacity: 1,
-            position: 'relative',
-            top: '0',
-            background: 'white',
-            display: 'flex',
-            flexDirection: 'row',
-            justifyContent: 'center',
-            alignItems: 'flex-start',
-            flexWrap: 'wrap',
-            gap: 'clamp(10px, 2vw, 20px)',
-            padding: 'clamp(10px, 2vw, 20px)',
           }}
         >
           <Product
@@ -581,22 +504,10 @@ export default function Home() {
 
         {/* Product 2 Section */}
         <div
+          className="w-full h-auto min-h-[400px] md:min-h-[539px] relative bg-white flex flex-col md:flex-row justify-center items-start flex-wrap gap-4 md:gap-6 lg:gap-8 p-4 md:p-6"
           style={{
-            width: '100%',
-            height: 'auto',
-            minHeight: 'clamp(400px, 50vw, 539px)',
             transform: 'rotate(0deg)',
             opacity: 1,
-            position: 'relative',
-            top: '0',
-            background: 'white',
-            display: 'flex',
-            flexDirection: 'row',
-            justifyContent: 'center',
-            alignItems: 'flex-start',
-            flexWrap: 'wrap',
-            gap: 'clamp(10px, 2vw, 20px)',
-            padding: 'clamp(10px, 2vw, 20px)',
           }}
         >
           <Product
@@ -628,12 +539,10 @@ export default function Home() {
 
       {/* About Us Section - Full Width */}
       <div
+        className="w-full h-auto min-h-[762px] relative overflow-hidden"
         style={{
-          width: '100%',
-          height: '762px',
           transform: 'rotate(0deg)',
           opacity: 0.8,
-          position: 'relative',
           backgroundImage: 'url("aboutusbackgound.jpg")',
           backgroundSize: 'cover',
           backgroundPosition: 'center',
@@ -642,7 +551,6 @@ export default function Home() {
           color: '#000000CC',
           margin: '0',
           padding: '0',
-          overflow: 'hidden',
         }}
       >
         <AboutUs />
@@ -650,15 +558,10 @@ export default function Home() {
 
       {/* FAQ Section */}
       <div
+        className="w-full max-w-[1510px] h-auto min-h-[886px] bg-[#F3F5F6] relative mx-auto"
         style={{
-          width: '100%',
-          maxWidth: '1510px',
-          height: '886px',
           transform: 'rotate(0deg)',
           opacity: 1,
-          background: '#F3F5F6',
-          position: 'relative',
-          margin: '0 auto',
         }}
       >
         <FAQ />

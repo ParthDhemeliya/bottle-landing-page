@@ -15,94 +15,46 @@ export default function Product({
 }: ProductProps) {
   return (
     <div
+      className="w-full max-w-[350px] sm:max-w-[380px] md:max-w-[420px] lg:max-w-[450px] xl:max-w-[480px] h-auto min-h-[420px] sm:min-h-[400px] md:min-h-[450px] lg:min-h-[500px] xl:min-h-[550px] flex flex-col items-center justify-center flex-1 min-w-[320px] sm:min-w-[320px] relative p-3 sm:p-4 md:p-5 lg:p-6 xl:p-7"
       style={{
-        width: '100%',
-        maxWidth: '420px',
-        height: 'auto',
-        minHeight: 'clamp(400px, 50vw, 539px)',
         transform: 'rotate(0deg)',
         opacity: 1,
         border: 'none',
         borderRadius: '8px',
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        justifyContent: 'flex-start',
-        paddingTop: '0',
-        flex: '1',
-        minWidth: '280px',
-        position: 'relative',
-        padding: '0 10px',
       }}
     >
-      <Image
-        src={imageSrc}
-        alt={imageAlt}
-        width={420}
-        height={420}
-        style={{
-          width: '100%',
-          maxWidth: 'clamp(280px, 90vw, 420px)',
-          height: 'auto',
-          aspectRatio: '1/1',
-          transform: 'rotate(0deg)',
-          opacity: 1,
-          borderRadius: 'clamp(16px, 3vw, 24px)',
-          objectFit: 'cover',
-        }}
-      />
+      <div className="w-full flex justify-center mb-4 sm:mb-5 md:mb-6 lg:mb-7 xl:mb-8">
+        <Image
+          src={imageSrc}
+          alt={imageAlt}
+          width={420}
+          height={420}
+          className="w-full max-w-[280px] sm:max-w-[250px] md:max-w-[280px] lg:max-w-[320px] xl:max-w-[360px] h-auto aspect-square rounded-xl sm:rounded-2xl md:rounded-3xl object-cover ml-2 sm:ml-3 md:ml-4 lg:ml-5 xl:ml-6"
+          style={{
+            transform: 'rotate(0deg)',
+            opacity: 1,
+          }}
+        />
+      </div>
       <div
+        className="w-full max-w-[280px] sm:max-w-[250px] md:max-w-[280px] lg:max-w-[320px] xl:max-w-[360px] h-auto min-h-[35px] sm:min-h-[35px] md:min-h-[40px] lg:min-h-[45px] xl:min-h-[50px] font-['Familjen_Grotesk'] font-normal text-xl sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl leading-tight tracking-[0%] text-left text-black flex items-center justify-start mb-3 sm:mb-4 md:mb-5 lg:mb-6 xl:mb-7 px-2 sm:px-3 md:px-4 lg:px-5"
         style={{
-          width: '100%',
-          maxWidth: '243px',
-          height: 'auto',
-          minHeight: '40px',
           opacity: 1,
-          position: 'absolute',
-          top: 'clamp(350px, 45vw, 430px)',
-          left: '0',
-          fontFamily: 'Familjen Grotesk, sans-serif',
-          fontWeight: 400,
-          fontStyle: 'normal',
-          fontSize: 'clamp(24px, 4vw, 32px)',
-          lineHeight: '100%',
-          letterSpacing: '0%',
-          textAlign: 'left',
-          color: 'black',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'flex-start',
         }}
       >
         {name}
       </div>
-      <button
-        onClick={onLearnMore}
-        style={{
-          width: 'clamp(160px, 80%, 190px)',
-          height: 'clamp(44px, 6vw, 49px)',
-          opacity: 1,
-          position: 'absolute',
-          top: 'clamp(410px, 55vw, 490px)',
-          left: '0',
-          borderRadius: '100px',
-          gap: '10px',
-          padding: 'clamp(10px, 2vw, 12px) clamp(24px, 4vw, 36px)',
-          background: 'linear-gradient(90deg, #00D1FF 0%, #1A83FF 100%)',
-          border: 'none',
-          color: 'white',
-          fontFamily: 'Familjen Grotesk, sans-serif',
-          fontWeight: 500,
-          fontSize: 'clamp(14px, 2.5vw, 16px)',
-          cursor: 'pointer',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          whiteSpace: 'nowrap',
-        }}
-      >
-        LEARN MORE
-      </button>
+      <div className="w-full max-w-[280px] sm:max-w-[250px] md:max-w-[280px] lg:max-w-[320px] xl:max-w-[360px] flex justify-start">
+        <button
+          onClick={onLearnMore}
+          className="w-[140px] sm:w-[140px] md:w-[160px] lg:w-[180px] xl:w-[200px] h-[40px] sm:h-[40px] md:h-[44px] lg:h-[48px] xl:h-[52px] rounded-full gap-2 sm:gap-2 md:gap-3 lg:gap-3 px-4 sm:px-5 md:px-6 lg:px-8 xl:px-10 py-2 sm:py-2.5 md:py-3 lg:py-3.5 xl:py-4 bg-gradient-to-r from-[#00D1FF] to-[#1A83FF] border-none text-white font-['Familjen_Grotesk'] font-medium text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl cursor-pointer flex items-center justify-center whitespace-nowrap"
+          style={{
+            opacity: 1,
+          }}
+        >
+          LEARN MORE
+        </button>
+      </div>
     </div>
   )
 }

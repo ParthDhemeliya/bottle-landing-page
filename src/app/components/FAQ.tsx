@@ -36,72 +36,33 @@ const FAQ = () => {
 
   return (
     <div
+      className="top-20 md:top-[80px] w-full relative bg-white rounded-lg shadow-lg overflow-hidden max-w-[1320px] min-h-[726px] mx-auto p-4 md:p-6 lg:p-8"
       style={{
-        top: '80px',
-        width: '100%',
         transform: 'rotate(0deg)',
         opacity: 1,
-        position: 'relative',
-        backgroundColor: 'white',
-        borderRadius: '8px',
-        boxShadow: 'rgba(0, 0, 0, 0.1) 0px 4px 6px',
-        overflow: 'hidden',
-        maxWidth: '1320px',
-        minHeight: '726px',
-        margin: '0px auto',
-        padding: '20px',
       }}
     >
       {faqItems.map((item, index) => (
         <div
           key={item.id}
+          className="w-full min-h-[162px] md:min-h-[231px] border-b border-gray-200 last:border-b-0 p-4 md:p-6 lg:p-8 flex flex-col bg-white transition-all duration-300 ease-in-out"
           style={{
-            width: '100%',
             minHeight: expandedItem === index ? '231px' : '162px',
-            borderBottom:
-              index < faqItems.length - 1 ? '1px solid #e5e7eb' : 'none',
-            padding: 'clamp(15px, 2vw, 30px)',
-            display: 'flex',
-            flexDirection: 'column',
-            backgroundColor: 'white',
-            transition: 'all 0.3s ease',
           }}
         >
           {/* Fixed Header Row - Question and Button */}
           <div
+            className="flex items-center justify-between h-12 md:h-[48px] mb-0 md:mb-4"
             style={{
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'space-between',
-              height: '48px',
               marginBottom: expandedItem === index ? '15px' : '0',
             }}
           >
-            <div
-              style={{
-                display: 'flex',
-                alignItems: 'center',
-                gap: 'clamp(15px, 2vw, 20px)',
-                flex: 1,
-                position: 'relative',
-                top: 'clamp(30px, 4vw, 56px)',
-                paddingLeft: 'clamp(30px, 4vw, 62px)',
-                paddingRight: 'clamp(30px, 4vw, 62px)',
-              }}
-            >
+            <div className="flex items-center gap-4 md:gap-5 flex-1 relative top-8 md:top-14 px-4 md:px-8 lg:px-16">
               <div
+                className="font-bold text-2xl md:text-4xl lg:text-5xl leading-tight tracking-wide text-gray-400 flex items-center justify-center"
                 style={{
-                  // fontFamily: 'Inter',
-                  fontWeight: 700,
-                  fontSize: 'clamp(32px, 4vw, 48px)',
-                  lineHeight: '120%',
-                  letterSpacing: '0.25px',
                   // background: '#3C3C4380',
-                  color: '#9ca3af',
                   minWidth: 'clamp(40px, 5vw, 60px)',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
                 }}
               >
                 {String(item.id).padStart(2, '0')}
