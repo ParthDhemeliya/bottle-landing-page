@@ -3,7 +3,7 @@ import Image from 'next/image'
 
 const ContactUs = () => {
   return (
-    <div className="w-100% max-w-[1320px] min-h-[750px] opacity-100 rounded-[clamp(12px,2vw,18.7px)] bg-gradient-to-r from-[rgba(32,31,31,0.8)] to-[#201F1F] relative overflow-hidden mx-auto mb-[116px] p-[clamp(20px,3vw,40px)] top-[2335px]">
+    <div className="w-100% max-w-[1320px] min-h-[750px] opacity-100 rounded-[clamp(12px,2vw,18.7px)] bg-gradient-to-r from-[rgba(32,31,31,0.8)] to-[#201F1F] relative overflow-hidden mx-auto mb-[116px] p-[clamp(20px,3vw,40px)] mt-[45px]">
       {/* Bottle Image */}
       <div className="absolute top-[clamp(80px,10vw,142.12px)] left-[clamp(-60px,-5vw,-37.24px)] rotate-[23.19deg] opacity-90 z-10">
         <Image

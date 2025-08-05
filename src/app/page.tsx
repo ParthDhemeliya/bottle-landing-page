@@ -11,6 +11,7 @@ import Product from '@/components/Product'
 import AboutUs from '@/components/AboutUs'
 // import ContactUs from '@/components/ContactUs'
 import ContactUs from './components/ContactUs'
+import Footer from './components/Footer'
 import { relative } from 'path'
 import FAQ from './components/FAQ'
 
@@ -416,16 +417,15 @@ export default function Home() {
         </div>
       </div>
       <div
-        className="absolute"
+        className="relative"
         style={{
           width: '100%',
           maxWidth: '1320px',
           height: 'auto',
           minHeight: '1258px',
-          transform: 'rotate(0deg) translateX(-50%)',
+          transform: 'rotate(0deg)',
           opacity: 1,
-          top: '1800px',
-          left: '50%',
+          margin: '0 auto',
           background: 'white',
           padding: '20px',
         }}
@@ -629,7 +629,7 @@ export default function Home() {
       {/* About Us Section - Full Width */}
       <div
         style={{
-          width: '100vw',
+          width: '100%',
           height: '762px',
           transform: 'rotate(0deg)',
           opacity: 0.8,
@@ -641,13 +641,8 @@ export default function Home() {
           backgroundColor: '#2d3748',
           color: '#000000CC',
           margin: '0',
-          top: '1350px',
           padding: '0',
           overflow: 'hidden',
-          left: '50%',
-          right: '50%',
-          marginLeft: '-50vw',
-          marginRight: '-50vw',
         }}
       >
         <AboutUs />
@@ -656,22 +651,24 @@ export default function Home() {
       {/* FAQ Section */}
       <div
         style={{
-          width: '1510px',
+          width: '100%',
+          maxWidth: '1510px',
           height: '886px',
-          top: '3980px',
-          left: '1px',
           transform: 'rotate(0deg)',
           opacity: 1,
           background: '#F3F5F6',
-          position: 'absolute',
+          position: 'relative',
+          margin: '0 auto',
         }}
       >
         <FAQ />
       </div>
 
       {/* Contact Us Section */}
-
       <ContactUs />
+
+      {/* Footer Section */}
+      <Footer />
     </>
   )
 }
