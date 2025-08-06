@@ -9,14 +9,11 @@ import BottleCap from '@/components/svg/bottle/bottleCap'
 import BottleDown from '@/components/svg/bottle/bottleDown'
 import Product from '@/components/Product'
 import AboutUs from '@/components/AboutUs'
-// import ContactUs from '@/components/ContactUs'
 import ContactUs from './components/ContactUs'
 import Footer from './components/Footer'
-import { relative } from 'path'
 import FAQ from './components/FAQ'
 
 export default function Home() {
-  const containerRef = useRef<HTMLDivElement>(null)
   const textRef = useRef<HTMLDivElement>(null)
   const subtitleRef = useRef<HTMLDivElement>(null)
   const buttonRef = useRef<HTMLDivElement>(null)
@@ -26,12 +23,10 @@ export default function Home() {
   const bottleDownRef = useRef<HTMLDivElement>(null)
   const home1Ref = useRef<HTMLDivElement>(null)
   const home3Ref = useRef<HTMLDivElement>(null)
-  const animationStoppedRef = useRef(false)
 
   useEffect(() => {
-    const tl = gsap.timeline({ delay: 0.8 }) // No delay - starts immediately
+    const tl = gsap.timeline({ delay: 0 })
 
-    // Initial bottle opening animation
     tl.fromTo(
       bottleCapRef.current,
       {
@@ -46,7 +41,7 @@ export default function Home() {
       .fromTo(
         bottleDownRef.current,
         {
-          top: '347px',
+          top: '56%',
         },
         {
           top: '500px',
@@ -146,7 +141,7 @@ export default function Home() {
                 left: '50%',
                 transform: 'translateX(-50%)',
                 opacity: 1,
-                border: '2px solid #0066FF',
+
                 zIndex: 25,
               }}
             >
@@ -602,7 +597,7 @@ export default function Home() {
           />
 
           <Product
-            imageSrc="/dummyBottle3.jpg"
+            imageSrc="/dummyBottle3 (2).jpg"
             imageAlt="Bottle 3"
             name="Big Bull 1300"
             onLearnMore={() =>

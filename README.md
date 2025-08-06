@@ -1,36 +1,190 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# BOTOL - Premium Hydration Solutions
 
-## Getting Started
+## Project Overview
 
-First, run the development server:
+BOTOL is a modern, responsive web application showcasing premium hydration products including vacuum bottles, fridge bottles & jugs, borosilicate bottles, and kettles. Built with Next.js 15 and React 19, featuring smooth GSAP animations and a beautiful, user-friendly interface.
+
+## Features
+
+### Design & User Experience
+
+- **Responsive Design**: Optimized for all devices (mobile, tablet, desktop)
+- **Smooth Animations**: GSAP-powered bottle opening animations
+- **Modern UI**: Clean, professional design with gradient backgrounds
+- **Interactive Elements**: Hover effects and smooth transitions
+
+### Pages & Sections
+
+- **Hero Section**: Animated bottle opening sequence with call-to-action
+- **Product Showcase**: Grid layout displaying premium bottles
+- **About Us**: Company information with background imagery
+- **FAQ Section**: Frequently asked questions
+- **Contact Form**: Customer inquiry system
+- **Footer**: Complete site navigation and social links
+
+### Product Categories
+
+- **Vacuum Bottles**: Premium insulated containers
+- **Fridge Bottles & Jugs**: Refrigeration solutions
+- **Borosilicate Bottles**: High-quality glass containers
+- **Kettles**: Premium heating solutions
+
+## Technology Stack
+
+### Frontend
+
+- **Next.js 15.4.5**: React framework with App Router
+- **React 19.1.0**: Latest React version
+- **TypeScript 5**: Type-safe development
+- **Tailwind CSS 4**: Utility-first CSS framework
+- **GSAP 3.13.0**: Professional animations
+
+### Development Tools
+
+- **ESLint**: Code quality and consistency
+- **PostCSS**: CSS processing
+- **Node.js 22.17.0**: Runtime environment
+
+## Installation & Setup
+
+### Prerequisites
+
+- Node.js 20.x or higher
+- npm or yarn package manager
+
+### Quick Start
 
 ```bash
+# Clone the repository
+git clone [repository-url]
+cd botol
+
+# Install dependencies
+npm install
+
+# Run development server
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+
+# Open http://localhost:3000 in your browser
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Available Scripts
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+npm run dev      # Start development server
+npm run build    # Build for production
+npm run start    # Start production server
+npm run lint     # Run ESLint
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Project Structure
 
-## Learn More
+```
+botol/
+├── public/                 # Static assets
+│   ├── assets/            # Images and icons
+│   └── *.jpg              # Product images
+├── src/
+│   ├── app/               # Next.js App Router
+│   │   ├── components/    # Page-specific components
+│   │   ├── layout.tsx     # Root layout
+│   │   └── page.tsx       # Home page
+│   ├── components/        # Reusable components
+│   │   ├── Product.tsx    # Product card component
+│   │   ├── AboutUs.tsx    # About section
+│   │   └── svg/           # SVG components
+│   └── common/            # Shared components
+└── package.json           # Dependencies and scripts
+```
 
-To learn more about Next.js, take a look at the following resources:
+## Key Components
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Home Page (src/app/page.tsx)
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- **Hero Animation**: GSAP-powered bottle opening sequence
+- **Product Grid**: Responsive product showcase
+- **Interactive Elements**: Smooth scroll and hover effects
 
-## Deploy on Vercel
+### Product Component (src/components/Product.tsx)
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- **Responsive Design**: Adapts to all screen sizes
+- **Image Optimization**: Next.js Image component
+- **Call-to-Action**: Learn More buttons with event handling
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### SVG Components (src/components/svg/bottle/)
+
+- **Bottle2.tsx**: Animated bottle graphics
+- **Bottle3.tsx**: Premium bottle designs
+- **BottleCap.tsx**: Cap animations
+- **BottleDown.tsx**: Bottom section graphics
+
+## Deployment
+
+### Vercel (Recommended)
+
+```bash
+# Install Vercel CLI
+npm i -g vercel
+
+# Deploy
+vercel
+
+# Or connect GitHub repository for automatic deployments
+```
+
+### Environment Variables
+
+- No environment variables required for basic functionality
+- Configure in Vercel dashboard for production optimizations
+
+## Performance
+
+- **Lighthouse Score**: Optimized for performance, accessibility, and SEO
+- **Image Optimization**: Next.js automatic image optimization
+- **Code Splitting**: Automatic route-based code splitting
+- **Bundle Size**: Optimized for fast loading times
+
+## Development Guidelines
+
+### Code Quality
+
+- TypeScript for type safety
+- ESLint for code consistency
+- Responsive design principles
+- Accessibility best practices
+
+### Animation Guidelines
+
+- GSAP for complex animations
+- CSS transitions for simple effects
+- Performance-optimized animations
+- Mobile-friendly interactions
+
+## Browser Support
+
+- Chrome 90+
+- Firefox 88+
+- Safari 14+
+- Edge 90+
+
+## Contributing
+
+1. Fork the repository
+2. Create a feature branch
+3. Make your changes
+4. Run tests and linting
+5. Submit a pull request
+
+## License
+
+This project is proprietary and confidential.
+
+## Support
+
+For technical support or questions, please contact the development team.
+
+---
+
+**Last Updated**: August 2024  
+**Version**: 1.0.0  
+**Status**: Production Ready
