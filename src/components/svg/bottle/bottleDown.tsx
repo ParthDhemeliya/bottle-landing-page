@@ -2,27 +2,27 @@ export default function BottleDown() {
   return (
     <svg
       width="186"
-      height="513"
-      viewBox="0 0 186 513"
+      height="793"
+      viewBox="0 0 186 793"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
       // xmlns:xlink="http://www.w3.org/1999/xlink"
     >
-      <rect width="186" height="793" fill="url(#pattern0_18_71)" />
+      <rect width="186" height="793" fill="url(#pattern0_57_312)" />
       <defs>
         <pattern
-          id="pattern0_18_71"
+          id="pattern0_57_312"
           patternContentUnits="objectBoundingBox"
           width="1"
           height="1"
         >
           <use
-            href="#image0_18_71"
+            href="#image0_57_312"
             transform="matrix(0.002 0 0 0.000469105 0 -0.000769231)"
           />
         </pattern>
         <image
-          id="image0_18_71"
+          id="image0_57_312"
           width="500"
           height="2135"
           preserveAspectRatio="none"

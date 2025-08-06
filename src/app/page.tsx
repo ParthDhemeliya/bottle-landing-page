@@ -29,31 +29,31 @@ export default function Home() {
   const animationStoppedRef = useRef(false)
 
   useEffect(() => {
-    const tl = gsap.timeline({ delay: 0 }) // No delay - starts immediately
+    const tl = gsap.timeline({ delay: 0.8 }) // No delay - starts immediately
 
     // Initial bottle opening animation
     tl.fromTo(
       bottleCapRef.current,
       {
-        top: '56%',
+        top: '347px',
       },
       {
-        top: '250px', // LINE 42: Adjust cap final position (higher number = lower position)
-        duration: 1.3, // LINE 44: Adjust animation speed (0 = instant, higher = slower)
+        top: '50px',
+        duration: 1.3,
         ease: 'power2.inOut',
       }
     )
       .fromTo(
         bottleDownRef.current,
         {
-          top: '56%',
+          top: '347px',
         },
         {
-          top: '750px', // LINE 50: Adjust bottom final position (higher number = lower position)
-          duration: 1.3, // LINE 52: Adjust animation speed (0 = instant, higher = slower)
+          top: '500px',
+          duration: 1.3,
           ease: 'power2.inOut',
         },
-        '<' // Start at the same time as cap animation
+        '<'
       )
       .fromTo(
         '.ring-element',
@@ -67,7 +67,7 @@ export default function Home() {
           duration: 1.3,
           ease: 'power2.inOut',
         },
-        '<' // Start at the same time as bottle animation
+        '<'
       )
       .fromTo(
         textRef.current,
@@ -79,7 +79,7 @@ export default function Home() {
           duration: 1.3,
           ease: 'power2.inOut',
         },
-        '<' // Start at the same time as bottle animation
+        '<'
       )
       .fromTo(
         subtitleRef.current,
@@ -91,7 +91,35 @@ export default function Home() {
           duration: 1.3,
           ease: 'power2.inOut',
         },
-        '<' // Start at the same time as bottle animation
+        '<'
+      )
+      .fromTo(
+        bottle2Ref.current,
+        {
+          scale: 0.6,
+          y: -30,
+        },
+        {
+          scale: 1,
+          y: 0,
+          duration: 1.3,
+          ease: 'power2.inOut',
+        },
+        '<'
+      )
+      .fromTo(
+        bottle3Ref.current,
+        {
+          scale: 0.6,
+          y: -30,
+        },
+        {
+          scale: 1,
+          y: 0,
+          duration: 1.3,
+          ease: 'power2.inOut',
+        },
+        '<'
       )
   }, [])
 
@@ -110,31 +138,45 @@ export default function Home() {
           >
             {/* Central Bottle with Cap and Bottom */}
             <div
-              ref={bottleCapRef}
-              className="absolute w-[120px] h-[120px] sm:w-[150px] sm:h-[150px] md:w-[180px] md:h-[180px] lg:w-[200px] lg:h-[200px] xl:w-[220px] xl:h-[220px] top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-30"
               style={{
                 position: 'absolute',
-                top: '56%',
-                left: '58%',
-                transform: 'translate(-50%, -50%)',
-                zIndex: 30,
+                width: '186px',
+                height: '1243px',
+                top: '117px',
+                left: '50%',
+                transform: 'translateX(-50%)',
+                opacity: 1,
+                border: '2px solid #0066FF',
+                zIndex: 25,
               }}
             >
-              <BottleCap />
-            </div>
+              <div
+                ref={bottleCapRef}
+                className="absolute w-[120px] h-[120px] sm:w-[150px] sm:h-[150px] md:w-[180px] md:h-[180px] lg:w-[200px] lg:h-[200px] xl:w-[220px] xl:h-[220px] z-30"
+                style={{
+                  position: 'absolute',
+                  top: '347px',
+                  left: '58%',
+                  transform: 'translate(-50%, -50%)',
+                  zIndex: 30,
+                }}
+              >
+                <BottleCap />
+              </div>
 
-            <div
-              ref={bottleDownRef}
-              className="absolute w-[120px] h-[120px] sm:w-[150px] sm:h-[150px] md:w-[180px] md:h-[180px] lg:w-[200px] lg:h-[200px] xl:w-[220px] xl:h-[220px] top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-30"
-              style={{
-                position: 'absolute',
-                top: '56%',
-                left: '58%',
-                transform: 'translate(-50%, -50%)',
-                zIndex: 30,
-              }}
-            >
-              <BottleDown />
+              <div
+                ref={bottleDownRef}
+                className="absolute w-[120px] h-[120px] sm:w-[150px] sm:h-[150px] md:w-[180px] md:h-[180px] lg:w-[200px] lg:h-[200px] xl:w-[220px] xl:h-[220px] z-30"
+                style={{
+                  position: 'absolute',
+                  top: '347px',
+                  left: '58%',
+                  transform: 'translate(-50%, -50%)',
+                  zIndex: 30,
+                }}
+              >
+                <BottleDown />
+              </div>
             </div>
 
             <div
@@ -218,11 +260,11 @@ export default function Home() {
 
             <div
               ref={bottle2Ref}
-              className="absolute w-[120px] h-[120px] sm:w-[150px] sm:h-[150px] md:w-[180px] md:h-[180px] lg:w-[199px] lg:h-[199px] xl:w-[220px] xl:h-[220px] top-[400px] sm:top-[450px] md:top-[500px] lg:top-[550px] xl:top-[601px] left-[60px] sm:left-[70px] md:left-[80px] lg:left-[96px] xl:left-[110px] z-20"
+              className="absolute w-[80px] h-[80px] sm:w-[100px] sm:h-[100px] md:w-[110px] md:h-[110px] lg:w-[125px] lg:h-[125px] xl:w-[125px] xl:h-[125px] top-[550px] sm:top-[540px] md:top-[530px] lg:top-[525px] xl:top-[525px] left-[60px] sm:left-[70px] md:left-[80px] lg:left-[96px] xl:left-[96px] z-20"
               style={{
                 opacity: 1,
                 transform: 'rotate(0deg)',
-                borderRadius: '414.58px',
+                borderRadius: '260.42px',
                 background: 'linear-gradient(180deg, #4DFBFB 0%, #788EFF 100%)',
                 display: 'flex',
                 alignItems: 'center',
@@ -235,8 +277,8 @@ export default function Home() {
                   width: '60px',
                   height: '130px',
                   position: 'absolute',
-                  top: '50%',
-                  left: '50%',
+                  top: '66%',
+                  left: '56%',
                   transform: 'translate(-50%, -50%) rotate(-15deg)',
                   opacity: 1,
                 }}
@@ -247,11 +289,11 @@ export default function Home() {
 
             <div
               ref={bottle3Ref}
-              className="absolute w-[120px] h-[120px] sm:w-[150px] sm:h-[150px] md:w-[180px] md:h-[180px] lg:w-[199px] lg:h-[199px] xl:w-[220px] xl:h-[220px] top-[400px] sm:top-[450px] md:top-[500px] lg:top-[550px] xl:top-[601px] right-[60px] sm:right-[70px] md:right-[80px] lg:right-[96px] xl:right-[110px] z-20"
+              className="absolute w-[80px] h-[80px] sm:w-[100px] sm:h-[100px] md:w-[110px] md:h-[110px] lg:w-[125px] lg:h-[125px] xl:w-[125px] xl:h-[125px] top-[550px] sm:top-[540px] md:top-[530px] lg:top-[525px] xl:top-[525px] right-[60px] sm:right-[70px] md:right-[80px] lg:right-[96px] xl:right-[96px] z-20"
               style={{
                 opacity: 1,
                 transform: 'rotate(0deg)',
-                borderRadius: '414.58px',
+                borderRadius: '260.42px',
                 background: 'linear-gradient(180deg, #4DFBFB 0%, #788EFF 100%)',
                 display: 'flex',
                 alignItems: 'center',
@@ -264,8 +306,8 @@ export default function Home() {
                   width: '60px',
                   height: '130px',
                   position: 'absolute',
-                  top: '50%',
-                  left: '50%',
+                  top: '56%',
+                  left: '46%',
                   transform: 'translate(-50%, -50%) rotate(15deg)',
                   opacity: 1,
                 }}
