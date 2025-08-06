@@ -41,7 +41,7 @@ export default function Home() {
       .fromTo(
         bottleDownRef.current,
         {
-          top: '56%',
+          top: '347px',
         },
         {
           top: '500px',
