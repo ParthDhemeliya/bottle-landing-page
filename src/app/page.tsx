@@ -28,6 +28,73 @@ export default function Home() {
   const home3Ref = useRef<HTMLDivElement>(null)
   const animationStoppedRef = useRef(false)
 
+  useEffect(() => {
+    const tl = gsap.timeline({ delay: 0 }) // No delay - starts immediately
+
+    // Initial bottle opening animation
+    tl.fromTo(
+      bottleCapRef.current,
+      {
+        top: '56%',
+      },
+      {
+        top: '250px', // LINE 42: Adjust cap final position (higher number = lower position)
+        duration: 1.3, // LINE 44: Adjust animation speed (0 = instant, higher = slower)
+        ease: 'power2.inOut',
+      }
+    )
+      .fromTo(
+        bottleDownRef.current,
+        {
+          top: '56%',
+        },
+        {
+          top: '750px', // LINE 50: Adjust bottom final position (higher number = lower position)
+          duration: 1.3, // LINE 52: Adjust animation speed (0 = instant, higher = slower)
+          ease: 'power2.inOut',
+        },
+        '<' // Start at the same time as cap animation
+      )
+      .fromTo(
+        '.ring-element',
+        {
+          width: '280px',
+          height: '280px',
+        },
+        {
+          width: '600px',
+          height: '600px',
+          duration: 1.3,
+          ease: 'power2.inOut',
+        },
+        '<' // Start at the same time as bottle animation
+      )
+      .fromTo(
+        textRef.current,
+        {
+          scale: 0.3,
+        },
+        {
+          scale: 1,
+          duration: 1.3,
+          ease: 'power2.inOut',
+        },
+        '<' // Start at the same time as bottle animation
+      )
+      .fromTo(
+        subtitleRef.current,
+        {
+          scale: 0.3,
+        },
+        {
+          scale: 1,
+          duration: 1.3,
+          ease: 'power2.inOut',
+        },
+        '<' // Start at the same time as bottle animation
+      )
+  }, [])
+
   return (
     <>
       <div
@@ -47,8 +114,8 @@ export default function Home() {
               className="absolute w-[120px] h-[120px] sm:w-[150px] sm:h-[150px] md:w-[180px] md:h-[180px] lg:w-[200px] lg:h-[200px] xl:w-[220px] xl:h-[220px] top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-30"
               style={{
                 position: 'absolute',
-                top: '50%',
-                left: '50%',
+                top: '56%',
+                left: '58%',
                 transform: 'translate(-50%, -50%)',
                 zIndex: 30,
               }}
@@ -61,8 +128,8 @@ export default function Home() {
               className="absolute w-[120px] h-[120px] sm:w-[150px] sm:h-[150px] md:w-[180px] md:h-[180px] lg:w-[200px] lg:h-[200px] xl:w-[220px] xl:h-[220px] top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-30"
               style={{
                 position: 'absolute',
-                top: '50%',
-                left: '50%',
+                top: '56%',
+                left: '58%',
                 transform: 'translate(-50%, -50%)',
                 zIndex: 30,
               }}
@@ -71,7 +138,7 @@ export default function Home() {
             </div>
 
             <div
-              className="absolute w-[320px] h-[320px] sm:w-[350px] sm:h-[350px] md:w-[450px] md:h-[450px] lg:w-[550px] lg:h-[550px] xl:w-[600px] xl:h-[600px] rounded-full ring-element top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
+              className="absolute w-[280px] h-[280px] sm:w-[320px] sm:h-[320px] md:w-[360px] md:h-[360px] lg:w-[400px] lg:h-[400px] xl:w-[400px] xl:h-[400px] rounded-full ring-element top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
               style={{
                 background:
                   'conic-gradient(from 0deg, #4DFBFB, #788EFF, #4DFBFB)',
@@ -90,12 +157,12 @@ export default function Home() {
               className="absolute w-full max-w-[1083px] h-auto min-h-[200px] top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-20 px-4"
               style={{
                 opacity: 1,
-                transform: 'scale(1) translateY(-40px)',
+                transform: 'scale(0.3) translateY(-40px)',
                 fontFamily: 'Familjen Grotesk, sans-serif',
                 fontWeight: 600,
                 fontStyle: 'normal',
-                fontSize: 'clamp(48px, 8vw, 96px)',
-                lineHeight: 'clamp(52px, 8.5vw, 100px)',
+                fontSize: 'clamp(36px, 6vw, 72px)',
+                lineHeight: 'clamp(40px, 6.5vw, 76px)',
                 letterSpacing: '2%',
                 textAlign: 'center',
                 color: '#000000',
@@ -111,12 +178,12 @@ export default function Home() {
               className="absolute w-full max-w-[600px] h-auto min-h-[76px] top-1/2 left-1/2 transform -translate-x-1/2 translate-y-16 md:translate-y-20 z-20 px-4"
               style={{
                 opacity: 1,
-                transform: 'scale(1) translateY(0px)',
+                transform: 'scale(0.3) translateY(0px)',
                 fontFamily: 'Familjen Grotesk, sans-serif',
                 fontWeight: 400,
                 fontStyle: 'normal',
-                fontSize: 'clamp(18px, 3vw, 30px)',
-                lineHeight: '100%',
+                fontSize: 'clamp(16px, 2.5vw, 24px)',
+                lineHeight: '120%',
                 letterSpacing: '2%',
                 textAlign: 'center',
                 color: '#000000',
