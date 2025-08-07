@@ -25,97 +25,132 @@ export default function Home() {
   const home3Ref = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
-    const tl = gsap.timeline({ delay: 0 })
+    // Defer GSAP animations to improve initial load performance
+    const timer = setTimeout(() => {
+      const tl = gsap.timeline({ delay: 0 })
 
-    tl.fromTo(
-      bottleCapRef.current,
-      {
-        top: '347px',
-      },
-      {
-        top: '50px',
-        duration: 1.3,
-        ease: 'power2.inOut',
-      }
-    )
-      .fromTo(
-        bottleDownRef.current,
+      tl.fromTo(
+        bottleCapRef.current,
         {
           top: '347px',
         },
         {
-          top: '500px',
+          top: '50px',
           duration: 1.3,
           ease: 'power2.inOut',
-        },
-        '<'
+        }
       )
-      .fromTo(
-        '.ring-element',
-        {
-          width: '280px',
-          height: '280px',
-        },
-        {
-          width: '600px',
-          height: '600px',
-          duration: 1.3,
-          ease: 'power2.inOut',
-        },
-        '<'
-      )
-      .fromTo(
-        textRef.current,
-        {
-          scale: 0.3,
-        },
-        {
-          scale: 1,
-          duration: 1.3,
-          ease: 'power2.inOut',
-        },
-        '<'
-      )
-      .fromTo(
-        subtitleRef.current,
-        {
-          scale: 0.3,
-        },
-        {
-          scale: 1,
-          duration: 1.3,
-          ease: 'power2.inOut',
-        },
-        '<'
-      )
-      .fromTo(
-        bottle2Ref.current,
-        {
-          scale: 0.6,
-          y: -30,
-        },
-        {
-          scale: 1,
-          y: 0,
-          duration: 1.3,
-          ease: 'power2.inOut',
-        },
-        '<'
-      )
-      .fromTo(
-        bottle3Ref.current,
-        {
-          scale: 0.6,
-          y: -30,
-        },
-        {
-          scale: 1,
-          y: 0,
-          duration: 1.3,
-          ease: 'power2.inOut',
-        },
-        '<'
-      )
+        .fromTo(
+          bottleDownRef.current,
+          {
+            top: '347px',
+          },
+          {
+            top: '500px',
+            duration: 1.3,
+            ease: 'power2.inOut',
+          },
+          '<'
+        )
+        .fromTo(
+          '.ring-element',
+          {
+            width: '280px',
+            height: '280px',
+          },
+          {
+            width: '600px',
+            height: '600px',
+            duration: 1.3,
+            ease: 'power2.inOut',
+          },
+          '<'
+        )
+        .fromTo(
+          textRef.current,
+          {
+            scale: 0.3,
+          },
+          {
+            scale: 1,
+            duration: 1.3,
+            ease: 'power2.inOut',
+          },
+          '<'
+        )
+        .fromTo(
+          subtitleRef.current,
+          {
+            scale: 0.3,
+          },
+          {
+            scale: 1,
+            duration: 1.3,
+            ease: 'power2.inOut',
+          },
+          '<'
+        )
+        .fromTo(
+          bottle2Ref.current,
+          {
+            scale: 0.6,
+            y: -30,
+          },
+          {
+            scale: 1,
+            y: 0,
+            duration: 1.3,
+            ease: 'power2.inOut',
+          },
+          '<'
+        )
+        .fromTo(
+          bottle3Ref.current,
+          {
+            scale: 0.6,
+            y: -30,
+          },
+          {
+            scale: 1,
+            y: 0,
+            duration: 1.3,
+            ease: 'power2.inOut',
+          },
+          '<'
+        )
+    }, 100) // Small delay to improve initial paint
+
+    // Intersection Observer for lazy loading
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const target = entry.target as HTMLElement
+            target.style.opacity = '1'
+            target.style.transform = 'translateY(0)'
+          }
+        })
+      },
+      {
+        threshold: 0.1,
+        rootMargin: '50px',
+      }
+    )
+
+    // Observe lazy sections
+    const lazySections = document.querySelectorAll('[data-lazy="true"]')
+    lazySections.forEach((section) => {
+      const element = section as HTMLElement
+      element.style.opacity = '0'
+      element.style.transform = 'translateY(20px)'
+      element.style.transition = 'opacity 0.6s ease, transform 0.6s ease'
+      observer.observe(section)
+    })
+
+    return () => {
+      clearTimeout(timer)
+      observer.disconnect()
+    }
   }, [])
 
   return (
@@ -334,6 +369,9 @@ export default function Home() {
             width={400}
             height={860}
             className="w-full h-[300px] md:h-[600px] lg:h-[860px] object-contain"
+            priority
+            placeholder="blur"
+            blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAABAAEDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWGRkqGx0f/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R//2Q=="
           />
         </div>
 
@@ -362,6 +400,7 @@ export default function Home() {
                     borderRadius: '500px',
                     opacity: 1,
                   }}
+                  loading="lazy"
                 />
               </div>
               <span
@@ -396,6 +435,7 @@ export default function Home() {
                     borderRadius: '500px',
                     opacity: 1,
                   }}
+                  loading="lazy"
                 />
               </div>
               <span
@@ -430,6 +470,7 @@ export default function Home() {
                     borderRadius: '500px',
                     opacity: 1,
                   }}
+                  loading="lazy"
                 />
               </div>
               <span
@@ -464,6 +505,7 @@ export default function Home() {
                     borderRadius: '500px',
                     opacity: 1,
                   }}
+                  loading="lazy"
                 />
               </div>
               <span
@@ -579,25 +621,27 @@ export default function Home() {
             transform: 'rotate(0deg)',
             opacity: 1,
           }}
+          data-lazy="true"
         >
           <Product
-            imageSrc="/dummyBottle1.jpg"
+            imageSrc="/optimized-dummyBottle1.webp"
             imageAlt="Bottle 1"
             name="Rainbow 600"
+            priority={true}
             onLearnMore={() =>
               console.log('Learn more clicked for Rainbow 600')
             }
           />
 
           <Product
-            imageSrc="/dummyBottle2.jpg"
+            imageSrc="/optimized-dummyBottle2.webp"
             imageAlt="Bottle 2"
             name="Rio 650"
             onLearnMore={() => console.log('Learn more clicked for Rio 650')}
           />
 
           <Product
-            imageSrc="/dummyBottle3 (2).jpg"
+            imageSrc="/optimized-dummyBottle3 (2).webp"
             imageAlt="Bottle 3"
             name="Big Bull 1300"
             onLearnMore={() =>
@@ -613,16 +657,17 @@ export default function Home() {
             transform: 'rotate(0deg)',
             opacity: 1,
           }}
+          data-lazy="true"
         >
           <Product
-            imageSrc="/dummyBottle4.jpg"
+            imageSrc="/optimized-dummyBottle4.webp"
             imageAlt="Bottle 1"
             name="Rome 600"
             onLearnMore={() => console.log('Learn more clicked for Rome 600')}
           />
 
           <Product
-            imageSrc="/dummyBottle1.jpg"
+            imageSrc="/optimized-dummyBottle1.webp"
             imageAlt="Bottle 2"
             name="Rainbow 600"
             onLearnMore={() =>
@@ -631,7 +676,7 @@ export default function Home() {
           />
 
           <Product
-            imageSrc="/dummyBottle5.jpg"
+            imageSrc="/optimized-dummyBottle5.webp"
             imageAlt="Bottle 3"
             name="Sweetie 200"
             onLearnMore={() =>
@@ -647,7 +692,7 @@ export default function Home() {
         style={{
           transform: 'rotate(0deg)',
           opacity: 0.8,
-          backgroundImage: 'url("aboutusbackgound.jpg")',
+          backgroundImage: 'url("optimized-aboutusbackgound.webp")',
           backgroundSize: 'cover',
           backgroundPosition: 'center',
           backgroundRepeat: 'no-repeat',

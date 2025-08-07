@@ -23,7 +23,7 @@ export default function AboutUs() {
   return (
     <div
       ref={aboutUsRef}
-      className="relative w-full min-h-screen px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 py-8 sm:py-12 md:py-16 lg:py-20"
+      className="relative w-full min-h-screen px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 py-8 sm:py-12 md:py-16 lg:py-20 bg-black opacity-80"
     >
       {/* Mobile Layout - Stacked */}
       <div className="block lg:hidden">
