@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { gsap } from 'gsap'
 import Image from 'next/image'
 import Bottle2 from '@/components/svg/bottle/bottle2'
@@ -14,6 +14,7 @@ import Footer from './components/Footer'
 import FAQ from './components/FAQ'
 
 export default function Home() {
+  const [isMobile, setIsMobile] = useState(false)
   const textRef = useRef<HTMLDivElement>(null)
   const subtitleRef = useRef<HTMLDivElement>(null)
   const buttonRef = useRef<HTMLDivElement>(null)
@@ -23,6 +24,11 @@ export default function Home() {
   const bottleDownRef = useRef<HTMLDivElement>(null)
   const home1Ref = useRef<HTMLDivElement>(null)
   const home3Ref = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    // Set mobile state after component mounts
+    setIsMobile(window.innerWidth < 640)
+  }, [])
 
   useEffect(() => {
     // Defer GSAP animations to improve initial load performance
@@ -55,12 +61,12 @@ export default function Home() {
         .fromTo(
           '.ring-element',
           {
-            width: '280px',
-            height: '280px',
+            width: isMobile ? '150px' : '280px',
+            height: isMobile ? '150px' : '280px',
           },
           {
-            width: '600px',
-            height: '600px',
+            width: isMobile ? '300px' : '600px',
+            height: isMobile ? '300px' : '600px',
             duration: 1.3,
             ease: 'power2.inOut',
           },
@@ -168,15 +174,14 @@ export default function Home() {
           >
             {/* Central Bottle with Cap and Bottom */}
             <div
+              className="absolute left-[38%] sm:left-1/2"
               style={{
                 position: 'absolute',
                 width: '186px',
                 height: '1243px',
                 top: '117px',
-                left: '50%',
                 transform: 'translateX(-50%)',
                 opacity: 1,
-
                 zIndex: 25,
               }}
             >
@@ -210,7 +215,7 @@ export default function Home() {
             </div>
 
             <div
-              className="absolute w-[280px] h-[280px] sm:w-[320px] sm:h-[320px] md:w-[360px] md:h-[360px] lg:w-[400px] lg:h-[400px] xl:w-[400px] xl:h-[400px] rounded-full ring-element top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
+              className="absolute w-[150px] h-[150px] sm:w-[300px] sm:h-[300px] md:w-[360px] md:h-[360px] lg:w-[400px] lg:h-[400px] xl:w-[400px] xl:h-[400px] rounded-full ring-element top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
               style={{
                 background:
                   'conic-gradient(from 0deg, #4DFBFB, #788EFF, #4DFBFB)',
