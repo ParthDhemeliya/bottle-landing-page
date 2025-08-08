@@ -687,25 +687,21 @@ export default function Home() {
             imageAlt="Bottle 1"
             name="Rainbow 600"
             priority={true}
-            onLearnMore={() =>
-              console.log('Learn more clicked for Rainbow 600')
-            }
+            onLearnMore={() => {}}
           />
 
           <Product
             imageSrc="/optimized-dummyBottle2.webp"
             imageAlt="Bottle 2"
             name="Rio 650"
-            onLearnMore={() => console.log('Learn more clicked for Rio 650')}
+            onLearnMore={() => {}}
           />
 
           <Product
             imageSrc="/optimized-dummyBottle3 (2).webp"
             imageAlt="Bottle 3"
             name="Big Bull 1300"
-            onLearnMore={() =>
-              console.log('Learn more clicked for Big Bull 1300')
-            }
+            onLearnMore={() => {}}
           />
         </div>
 
@@ -722,25 +718,21 @@ export default function Home() {
             imageSrc="/optimized-dummyBottle4.webp"
             imageAlt="Bottle 1"
             name="Rome 600"
-            onLearnMore={() => console.log('Learn more clicked for Rome 600')}
+            onLearnMore={() => {}}
           />
 
           <Product
             imageSrc="/optimized-dummyBottle1.webp"
             imageAlt="Bottle 2"
             name="Rainbow 600"
-            onLearnMore={() =>
-              console.log('Learn more clicked for Rainbow 600')
-            }
+            onLearnMore={() => {}}
           />
 
           <Product
             imageSrc="/optimized-dummyBottle5.webp"
             imageAlt="Bottle 3"
             name="Sweetie 200"
-            onLearnMore={() =>
-              console.log('Learn more clicked for Sweetie 200')
-            }
+            onLearnMore={() => {}}
           />
         </div>
       </div>

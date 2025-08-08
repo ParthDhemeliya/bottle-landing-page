@@ -80,18 +80,6 @@ export default function RootLayout({
         {/* Preload critical resources */}
         <link
           rel="preload"
-          href="/optimized-dummyBottle1.webp"
-          as="image"
-          type="image/webp"
-        />
-        <link
-          rel="preload"
-          href="/optimized-aboutusbackgound.webp"
-          as="image"
-          type="image/webp"
-        />
-        <link
-          rel="preload"
           href="/assets/30TOLlogo.jpg"
           as="image"
           type="image/jpeg"

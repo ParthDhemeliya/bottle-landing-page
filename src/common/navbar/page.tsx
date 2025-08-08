@@ -3,8 +3,7 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import { useState } from 'react'
-// import Logo from '@/assets/30TOLlogo.jpg'
-import Logo from '../../../public/assets/30TOLlogo.jpg' // Adjust the path as necessary
+import Logo from '../../../public/assets/30TOLlogo.jpg'
 
 export default function NavBar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)

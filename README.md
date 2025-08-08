@@ -83,10 +83,16 @@ npm run lint     # Run ESLint
 botol/
 ├── public/                 # Static assets
 │   ├── assets/            # Images and icons
-│   └── *.jpg              # Product images
+│   ├── optimized-*.webp   # Optimized product images
+│   └── *.png              # Icon images
 ├── src/
 │   ├── app/               # Next.js App Router
 │   │   ├── components/    # Page-specific components
+│   │   ├── about/         # About page
+│   │   ├── contact/       # Contact page
+│   │   ├── shop/          # Shop page
+│   │   ├── journal/       # Journal page
+│   │   ├── custom/        # Custom page
 │   │   ├── layout.tsx     # Root layout
 │   │   └── page.tsx       # Home page
 │   ├── components/        # Reusable components
@@ -94,6 +100,7 @@ botol/
 │   │   ├── AboutUs.tsx    # About section
 │   │   └── svg/           # SVG components
 │   └── common/            # Shared components
+│       └── navbar/        # Navigation component
 └── package.json           # Dependencies and scripts
 ```
 
@@ -137,12 +144,15 @@ vercel
 - No environment variables required for basic functionality
 - Configure in Vercel dashboard for production optimizations
 
-## Performance
+## Performance & Optimization
 
 - **Lighthouse Score**: Optimized for performance, accessibility, and SEO
-- **Image Optimization**: Next.js automatic image optimization
+- **Image Optimization**: Next.js automatic image optimization with WebP format
 - **Code Splitting**: Automatic route-based code splitting
 - **Bundle Size**: Optimized for fast loading times
+- **Production Ready**: Cleaned up console logs, unused files, and optimized configurations
+- **Mobile Optimized**: Responsive design with mobile-first approach
+- **SEO Optimized**: Meta tags, sitemap, and robots.txt included
 
 ## Development Guidelines
 

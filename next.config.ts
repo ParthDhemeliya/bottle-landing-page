@@ -4,12 +4,14 @@ const nextConfig: NextConfig = {
   // Enable experimental features for better performance
   experimental: {
     optimizePackageImports: ['gsap'],
-    turbo: {
-      rules: {
-        '*.svg': {
-          loaders: ['@svgr/webpack'],
-          as: '*.js',
-        },
+  },
+
+  // Turbopack configuration
+  turbopack: {
+    rules: {
+      '*.svg': {
+        loaders: ['@svgr/webpack'],
+        as: '*.js',
       },
     },
   },
@@ -26,9 +28,6 @@ const nextConfig: NextConfig = {
 
   // Compression
   compress: true,
-
-  // Enable SWC minification
-  swcMinify: true,
 
   // Webpack optimizations
   webpack: (config, { dev, isServer }) => {

@@ -5,19 +5,9 @@ import { useRef, useEffect } from 'react'
 export default function AboutUs() {
   const aboutUsRef = useRef<HTMLDivElement>(null)
 
-  // Debug About Us section visibility
+  // Component mounted
   useEffect(() => {
-    console.log('AboutUs component mounted')
-    console.log('About Us section ref:', aboutUsRef.current)
-    if (aboutUsRef.current) {
-      console.log('About Us section dimensions:', {
-        offsetWidth: aboutUsRef.current.offsetWidth,
-        offsetHeight: aboutUsRef.current.offsetHeight,
-        clientWidth: aboutUsRef.current.clientWidth,
-        clientHeight: aboutUsRef.current.clientHeight,
-        getBoundingClientRect: aboutUsRef.current.getBoundingClientRect(),
-      })
-    }
+    // Component mounted
   }, [])
 
   return (
