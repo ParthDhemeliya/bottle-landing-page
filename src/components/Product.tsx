@@ -58,14 +58,14 @@ export default function Product({
         />
       </div>
       <div
-        className="w-full h-auto min-h-[35px] sm:min-h-[35px] md:min-h-[40px] lg:min-h-[45px] xl:min-h-[50px] font-['Familjen_Grotesk'] font-normal text-xl sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl leading-tight tracking-[0%] text-left text-black flex items-center justify-start mb-3 sm:mb-4 md:mb-5 lg:mb-6 xl:mb-7"
+        className="w-full h-auto min-h-[35px] sm:min-h-[35px] md:min-h-[40px] lg:min-h-[45px] xl:min-h-[50px] font-['Familjen_Grotesk'] font-normal text-xl sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl leading-tight tracking-[0%] text-center sm:text-left text-black flex items-center justify-center sm:justify-start mb-3 sm:mb-4 md:mb-5 lg:mb-6 xl:mb-7"
         style={{
           opacity: 1,
         }}
       >
         {name}
       </div>
-      <div className="w-full flex justify-start">
+      <div className="w-full flex justify-center sm:justify-start">
         <button
           onClick={onLearnMore}
           className="w-[140px] sm:w-[140px] md:w-[160px] lg:w-[180px] xl:w-[200px] h-[40px] sm:h-[40px] md:h-[44px] lg:h-[48px] xl:h-[52px] rounded-full gap-2 sm:gap-2 md:gap-3 lg:gap-3 px-4 sm:px-5 md:px-6 lg:px-8 xl:px-10 py-2 sm:py-2.5 md:py-3 lg:py-3.5 xl:py-4 bg-gradient-to-r from-[#00D1FF] to-[#1A83FF] border-none text-white font-['Familjen_Grotesk'] font-medium text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl cursor-pointer flex items-center justify-center whitespace-nowrap"

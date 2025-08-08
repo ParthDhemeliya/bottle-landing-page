@@ -35,55 +35,80 @@ export default function Home() {
     const timer = setTimeout(() => {
       const tl = gsap.timeline({ delay: 0 })
 
+      // Check if mobile for conditional bottle positioning
+      const isMobileDevice = window.innerWidth < 640
+
       tl.fromTo(
         bottleCapRef.current,
         {
           top: '347px',
         },
         {
-          top: '50px',
+          top: '80px',
           duration: 1.3,
           ease: 'power2.inOut',
         }
+      ).fromTo(
+        bottleDownRef.current,
+        {
+          top: '347px',
+        },
+        {
+          top: isMobileDevice ? '355px' : '520px',
+          duration: 1.3,
+          ease: 'power2.inOut',
+        },
+        '<'
       )
-        .fromTo(
-          bottleDownRef.current,
-          {
-            top: '347px',
-          },
-          {
-            top: '500px',
-            duration: 1.3,
-            ease: 'power2.inOut',
-          },
-          '<'
-        )
-        .fromTo(
+      // Use Tailwind breakpoint approach for ring animation
+      const mediaQuery = window.matchMedia('(max-width: 639px)') // Tailwind sm: breakpoint
+
+      if (mediaQuery.matches) {
+        // MOBILE DEVICES (425px width): Animate ring from 280px to 350px
+        tl.fromTo(
           '.ring-element',
           {
-            width: isMobile ? '150px' : '280px',
-            height: isMobile ? '150px' : '280px',
+            width: '280px',
+            height: '280px',
           },
           {
-            width: isMobile ? '300px' : '600px',
-            height: isMobile ? '300px' : '600px',
+            width: '400px',
+            height: '400px',
             duration: 1.3,
             ease: 'power2.inOut',
           },
           '<'
         )
-        .fromTo(
-          textRef.current,
+      } else {
+        // For desktop, animate the ring
+        tl.fromTo(
+          '.ring-element',
           {
-            scale: 0.3,
+            width: '280px',
+            height: '280px',
           },
           {
-            scale: 1,
+            width: '600px',
+            height: '600px',
             duration: 1.3,
             ease: 'power2.inOut',
           },
           '<'
         )
+      }
+
+      tl.fromTo(
+        textRef.current,
+        {
+          scale: 0.3,
+        },
+        {
+          scale: 1,
+          duration: 1.3,
+          ease: 'power2.inOut',
+        },
+        '<'
+      )
         .fromTo(
           subtitleRef.current,
           {
@@ -119,6 +144,18 @@ export default function Home() {
           {
             scale: 1,
             y: 0,
+            duration: 1.3,
+            ease: 'power2.inOut',
+          },
+          '<'
+        )
+        .fromTo(
+          buttonRef.current,
+          {
+            scale: isMobileDevice ? 0.3 : 1,
+          },
+          {
+            scale: 1,
             duration: 1.3,
             ease: 'power2.inOut',
           },
@@ -161,6 +198,13 @@ export default function Home() {
 
   return (
     <>
+      <style jsx>{`
+        @media (max-width: 639px) {
+          .bottle-svg-container {
+            transform: scale(0.6) !important;
+          }
+        }
+      `}</style>
       <div
         className="flex flex-col items-center justify-between bg-white"
         style={{ backgroundColor: 'white' }}
@@ -215,7 +259,7 @@ export default function Home() {
             </div>
 
             <div
-              className="absolute w-[150px] h-[150px] sm:w-[300px] sm:h-[300px] md:w-[360px] md:h-[360px] lg:w-[400px] lg:h-[400px] xl:w-[400px] xl:h-[400px] rounded-full ring-element top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
+              className="absolute w-[180px] h-[180px] sm:w-[300px] sm:h-[300px] md:w-[360px] md:h-[360px] lg:w-[400px] lg:h-[400px] xl:w-[400px] xl:h-[400px] rounded-full ring-element top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
               style={{
                 background:
                   'conic-gradient(from 0deg, #4DFBFB, #788EFF, #4DFBFB)',
@@ -252,7 +296,7 @@ export default function Home() {
 
             <div
               ref={subtitleRef}
-              className="absolute w-full max-w-[600px] h-auto min-h-[76px] top-1/2 left-1/2 transform -translate-x-1/2 translate-y-16 md:translate-y-20 z-20 px-4"
+              className="absolute w-full max-w-[600px] h-auto min-h-[76px] top-1/2 left-1/2 transform -translate-x-1/2 translate-y-6 sm:translate-y-16 md:translate-y-20 z-20 px-4"
               style={{
                 opacity: 1,
                 transform: 'scale(0.3) translateY(0px)',
@@ -273,10 +317,10 @@ export default function Home() {
 
             <div
               ref={buttonRef}
-              className="absolute w-[175px] h-[49px] top-1/2 left-1/2 transform -translate-x-1/2 translate-y-32 md:translate-y-40 z-20 cursor-pointer"
+              className="absolute w-[175px] h-[49px] top-1/2 left-1/2 transform -translate-x-1/2 translate-y-22 sm:translate-y-32 md:translate-y-40 z-20 cursor-pointer"
               style={{
                 opacity: 1,
-                transform: 'scale(1) translateY(0px)',
+                transform: `scale(${isMobile ? 0.3 : 1}) translateY(0px)`,
                 borderRadius: '100px',
                 padding: '12px 36px',
                 gap: '10px',
@@ -295,7 +339,7 @@ export default function Home() {
 
             <div
               ref={bottle2Ref}
-              className="absolute w-[80px] h-[80px] sm:w-[100px] sm:h-[100px] md:w-[110px] md:h-[110px] lg:w-[125px] lg:h-[125px] xl:w-[125px] xl:h-[125px] top-[550px] sm:top-[540px] md:top-[530px] lg:top-[525px] xl:top-[525px] left-[60px] sm:left-[70px] md:left-[80px] lg:left-[96px] xl:left-[96px] z-20"
+              className="absolute w-[80px] h-[80px] sm:w-[100px] sm:h-[100px] md:w-[110px] md:h-[110px] lg:w-[125px] lg:h-[125px] xl:w-[125px] xl:h-[125px] top-[583px] sm:top-[540px] md:top-[530px] lg:top-[525px] xl:top-[525px] left-[15px] sm:left-[70px] md:left-[80px] lg:left-[96px] xl:left-[96px] z-20"
               style={{
                 opacity: 1,
                 transform: 'rotate(0deg)',
@@ -318,13 +362,18 @@ export default function Home() {
                   opacity: 1,
                 }}
               >
-                <Bottle2 />
+                <div
+                  className="bottle-svg-container"
+                  style={{ transformOrigin: 'center' }}
+                >
+                  <Bottle2 />
+                </div>
               </div>
             </div>
 
             <div
               ref={bottle3Ref}
-              className="absolute w-[80px] h-[80px] sm:w-[100px] sm:h-[100px] md:w-[110px] md:h-[110px] lg:w-[125px] lg:h-[125px] xl:w-[125px] xl:h-[125px] top-[550px] sm:top-[540px] md:top-[530px] lg:top-[525px] xl:top-[525px] right-[60px] sm:right-[70px] md:right-[80px] lg:right-[96px] xl:right-[96px] z-20"
+              className="absolute w-[80px] h-[80px] sm:w-[100px] sm:h-[100px] md:w-[110px] md:h-[110px] lg:w-[125px] lg:h-[125px] xl:w-[125px] xl:h-[125px] top-[583px] sm:top-[540px] md:top-[530px] lg:top-[525px] xl:top-[525px] right-[15px] sm:right-[70px] md:right-[80px] lg:right-[96px] xl:right-[96px] z-20"
               style={{
                 opacity: 1,
                 transform: 'rotate(0deg)',
@@ -347,7 +396,12 @@ export default function Home() {
                   opacity: 1,
                 }}
               >
-                <Bottle3 />
+                <div
+                  className="bottle-svg-container"
+                  style={{ transformOrigin: 'center' }}
+                >
+                  <Bottle3 />
+                </div>
               </div>
             </div>
           </div>
@@ -712,7 +766,7 @@ export default function Home() {
 
       {/* FAQ Section */}
       <div
-        className="w-full max-w-[1510px] h-auto min-h-[886px] bg-[#F3F5F6] relative mx-auto"
+        className="w-full max-w-[1510px] h-auto min-h-[600px] sm:min-h-[700px] md:min-h-[805px] bg-[#F3F5F6] relative mx-auto py-4 sm:py-8 md:py-12"
         style={{
           transform: 'rotate(0deg)',
           opacity: 1,

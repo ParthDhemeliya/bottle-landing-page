@@ -36,7 +36,7 @@ const FAQ = () => {
 
   return (
     <div
-      className="top-20 md:top-[80px] w-full relative bg-white rounded-lg shadow-lg overflow-hidden max-w-[1320px] min-h-[726px] mx-auto p-4 md:p-6 lg:p-8"
+      className="top-20 md:top-[80px] w-full relative bg-white rounded-lg shadow-lg overflow-hidden max-w-[1320px] mx-auto p-2 sm:p-4 md:p-6 lg:p-8"
       style={{
         transform: 'rotate(0deg)',
         opacity: 1,
@@ -45,9 +45,9 @@ const FAQ = () => {
       {faqItems.map((item, index) => (
         <div
           key={item.id}
-          className="w-full min-h-[162px] md:min-h-[231px] border-b border-gray-200 last:border-b-0 p-4 md:p-6 lg:p-8 flex flex-col bg-white transition-all duration-300 ease-in-out"
+          className="w-full border-b border-gray-200 last:border-b-0 p-2 sm:p-4 md:p-6 lg:p-8 flex flex-col bg-white transition-all duration-300 ease-in-out"
           style={{
-            minHeight: expandedItem === index ? '231px' : '162px',
+            minHeight: expandedItem === index ? '231px' : 'auto',
           }}
         >
           {/* Fixed Header Row - Question and Button */}
@@ -57,7 +57,7 @@ const FAQ = () => {
               marginBottom: expandedItem === index ? '15px' : '0',
             }}
           >
-            <div className="flex items-center gap-4 md:gap-5 flex-1 relative top-8 md:top-14 px-4 md:px-8 lg:px-16">
+            <div className="flex items-center gap-2 sm:gap-4 md:gap-5 flex-1 px-2 sm:px-4 md:px-8 lg:px-16">
               <div
                 className="font-bold text-2xl md:text-4xl lg:text-5xl leading-tight tracking-wide text-gray-400 flex items-center justify-center"
                 style={{
@@ -125,12 +125,10 @@ const FAQ = () => {
               style={{
                 display: 'flex',
                 alignItems: 'flex-start',
-                gap: 'clamp(15px, 2vw, 20px)',
+                gap: 'clamp(10px, 1.5vw, 20px)',
                 flex: 1,
-                position: 'relative',
-                top: 'clamp(25px, 3vw, 43px)',
-                paddingLeft: 'clamp(30px, 4vw, 62px)',
-                paddingRight: 'clamp(30px, 4vw, 62px)',
+                paddingLeft: 'clamp(15px, 2vw, 62px)',
+                paddingRight: 'clamp(15px, 2vw, 62px)',
               }}
             >
               <div style={{ minWidth: 'clamp(40px, 5vw, 60px)' }}></div>
